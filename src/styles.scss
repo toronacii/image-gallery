@@ -22,3 +22,7 @@ body {
     margin: auto;
   }
 }
+
+img[loading="lazy"] {
+  background: url(./assets/oval.svg) no-repeat center;
+}

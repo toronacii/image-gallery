@@ -9,24 +9,52 @@ import { ImagesService } from '../images.service';
 })
 export class ImageDetailComponent implements OnInit {
 
-  id: string;
+  index: number;
+  pictures: any[] = [];
   picture: any;
+
+  isLoading = false;
 
   constructor(
     private activeModal: NgbActiveModal,
     private imagesService: ImagesService) { }
 
   ngOnInit(): void {
-    this.imagesService.one(this.id)
-      .subscribe(picture => {
-        picture.tags = (picture.tags || '').split(' ');
-        this.picture = picture;
-        console.log(picture);
-      });
+    this.load();
   }
 
   close() {
     this.activeModal.close();
+  }
+
+  prev(event: Event) {
+    event.preventDefault();
+    this.index--;
+    this.load();
+  }
+
+  next(event: Event) {
+    event.preventDefault();
+    this.index++;
+    this.load();
+  }
+
+  showPrev() {
+    return this.index > 0;
+  }
+
+  showNext() {
+    return this.index < this.pictures.length - 1;
+  }
+
+  private load() {
+    this.isLoading = true;
+    this.imagesService.one(this.pictures[this.index].id)
+      .subscribe(picture => {
+        picture.tags = (picture.tags || '').split(' ');
+        this.picture = picture;
+        this.isLoading = false;
+      });
   }
 
 }

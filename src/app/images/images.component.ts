@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoadingService } from '../shared/services/loading.service';
 import { ImageDetailComponent } from './image-detail/image-detail.component';
 import { ImagesService } from './images.service';
 
@@ -11,32 +12,34 @@ import { ImagesService } from './images.service';
 export class ImagesComponent implements OnInit {
 
   pictures: any[] = [];
-  pageCount: number;
   page = 1;
   hasMore = false;
 
   constructor(
+    private modalService: NgbModal,
     private imagesService: ImagesService,
-    private modalService: NgbModal) { }
+    private loadingService: LoadingService) { }
 
   ngOnInit() {
-    this.paginate();
+    this.showMore();
   }
 
-  paginate(page = 1) {
-    this.imagesService.all(page)
-      .subscribe(({ pageCount, page, hasMore, pictures }) => {
-        this.pageCount = pageCount;
+  showMore(page = 1) {
+    const showMore$ = this.imagesService.all(page);
+    this.loadingService
+      .prepare(showMore$)
+      .subscribe(({ page, hasMore, pictures }) => {
         this.page = page;
         this.hasMore = hasMore;
-        this.pictures = pictures;
+        this.pictures.push(...pictures);
       });
   }
 
-  open(event: Event, id: string) {
+  open(event: Event, index: number) {
     event.preventDefault();
-    const modalRef = this.modalService.open(ImageDetailComponent);
-    modalRef.componentInstance.id = id;
+    const modalRef = this.modalService.open(ImageDetailComponent, { size: 'lg' });
+    modalRef.componentInstance.pictures = this.pictures;
+    modalRef.componentInstance.index = index;
   }
 
 }
