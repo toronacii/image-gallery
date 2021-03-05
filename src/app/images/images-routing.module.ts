@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ImagesComponent } from './images.component';
 
 const routes: Routes = [{
   path: '',
-  loadChildren: () => import('./images/images.module').then(m => m.ImagesModule)
+  component: ImagesComponent
 }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class ImagesRoutingModule { }

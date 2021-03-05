@@ -3,8 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
 };
+
+export const API_KEY = '23567b218376f79d9415';
+export const API_URL = 'http://interview.agileengine.com';
 
 /*
  * For easier debugging in development mode, you can import the following file

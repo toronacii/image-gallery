@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  background-color: #1d1d1d !important;
+  font-family: "Asap", sans-serif;
+  color: #989898;
+  font-size: 16px;
+}
+
+#demo {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
