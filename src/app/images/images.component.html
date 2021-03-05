@@ -7,10 +7,17 @@
 <!-- Page Content -->
 <div class="container page-top">
   <div class="row">
-    <div class="col-lg-3 col-md-4 col-xs-6 thumb" *ngFor="let picture of pictures$ | async">
-      <a [href]="picture.cropped_picture" class="fancybox" rel="ligthbox">
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb" *ngFor="let picture of pictures">
+      <a href="#" class="fancybox" rel="ligthbox" (click)="open($event, picture.id)">
         <img [src]="picture.cropped_picture" class="zoom img-fluid " alt="">
       </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ngb-pagination size="sm" [(page)]="page" [pageSize]="10" [collectionSize]="10 * pageCount"
+        (pageChange)="paginate($event)">
+      </ngb-pagination>
     </div>
   </div>
 </div>

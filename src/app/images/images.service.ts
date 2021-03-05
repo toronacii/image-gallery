@@ -10,6 +10,10 @@ export class ImagesService {
   constructor(private http: HttpClient) { }
 
   all(page = 1) {
-    return this.http.get(API_URL + '/images')
+    return this.http.get<any>(API_URL + `/images?page=${page}`)
+  }
+
+  one(id: string) {
+    return this.http.get<any>(API_URL + `/images/${id}`)
   }
 }

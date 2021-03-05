@@ -15,3 +15,10 @@ body {
   position: relative;
   overflow: hidden;
 }
+
+.modal-content {
+  background-color: transparent;
+  > * {
+    margin: auto;
+  }
+}
