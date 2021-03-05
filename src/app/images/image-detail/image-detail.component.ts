@@ -48,11 +48,18 @@ export class ImageDetailComponent implements OnInit {
   }
 
   private load() {
+
+    const _pricing = this.pictures[this.index];
+    if (_pricing.full) {
+      this.picture = _pricing.full;
+      return;
+    }
+
     this.isLoading = true;
-    this.imagesService.one(this.pictures[this.index].id)
+    this.imagesService.one(_pricing.id)
       .subscribe(picture => {
         picture.tags = (picture.tags || '').split(' ');
-        this.picture = picture;
+        this.picture = _pricing.full = picture;
         this.isLoading = false;
       });
   }

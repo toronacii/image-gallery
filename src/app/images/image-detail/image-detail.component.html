@@ -1,7 +1,4 @@
 <div class="card position-relative" *ngIf="picture">
-  <button type="button" class="close" aria-label="Close" (click)="close()">
-    <span aria-hidden="true">&times;</span>
-  </button>
   <img class="card-img-top" [src]="picture.full_picture" alt="Card image cap">
 
   <a class="carousel-control-prev" href="#" role="button" *ngIf="showPrev()" (click)="prev($event)">
@@ -12,6 +9,10 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
+
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
 
   <div class="card-body">
     <h5 class="card-title">{{ picture.author }}</h5>
