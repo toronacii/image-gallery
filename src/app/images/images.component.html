@@ -15,8 +15,8 @@
   </div>
   <div class="row" *ngIf="pictures.length">
     <div class="col">
-      <ngb-pagination size="sm" [(page)]="page" [pageSize]="10" [collectionSize]="10 * pageCount"
-        (pageChange)="paginate($event)">
+      <ngb-pagination size="sm" [(page)]="page" [pageSize]="10" [collectionSize]="10 * pageCount" [maxSize]="5"
+        [rotate]="true" [ellipses]="false" (pageChange)="paginate($event)">
       </ngb-pagination>
     </div>
   </div>
