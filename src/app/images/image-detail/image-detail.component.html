@@ -1,5 +1,5 @@
 <div class="card position-relative" *ngIf="picture">
-  <img class="card-img-top" [src]="picture.full_picture" alt="Card image cap">
+  <img class="card-img-top" [src]="picture.url" alt="Card image cap">
 
   <a class="carousel-control-prev" href="#" role="button" *ngIf="showPrev()" (click)="prev($event)">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { DetailedPicture as DetailedPicture } from '../classes/detailed-picture.class';
+import { Picture } from '../classes/picture.class';
 import { ImagesService } from '../images.service';
 
 @Component({
@@ -10,8 +12,8 @@ import { ImagesService } from '../images.service';
 export class ImageDetailComponent implements OnInit {
 
   index: number;
-  pictures: any[] = [];
-  picture: any;
+  pictures: Picture[] = [];
+  picture: DetailedPicture;
 
   isLoading = false;
 
@@ -49,17 +51,16 @@ export class ImageDetailComponent implements OnInit {
 
   private load() {
 
-    const _pricing = this.pictures[this.index];
-    if (_pricing.full) {
-      this.picture = _pricing.full;
+    const _picture = this.pictures[this.index];
+    if (_picture.full) {
+      this.picture = _picture.full;
       return;
     }
 
     this.isLoading = true;
-    this.imagesService.one(_pricing.id)
+    this.imagesService.one(_picture.id)
       .subscribe(picture => {
-        picture.tags = (picture.tags || '').split(' ');
-        this.picture = _pricing.full = picture;
+        this.picture = _picture.full = picture;
         this.isLoading = false;
       });
   }

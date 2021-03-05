@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Paginator } from '../shared/classes/paginator.class';
 import { LoadingService } from '../shared/services/loading.service';
+import { Picture } from './classes/picture.class';
 import { ImageDetailComponent } from './image-detail/image-detail.component';
 import { ImagesService } from './images.service';
 
@@ -11,9 +13,10 @@ import { ImagesService } from './images.service';
 })
 export class ImagesComponent implements OnInit {
 
-  pictures: any[] = [];
-  page = 1;
+  pictures: Picture[] = [];
   hasMore = false;
+  page = 1;
+
 
   constructor(
     private modalService: NgbModal,
@@ -28,10 +31,10 @@ export class ImagesComponent implements OnInit {
     const showMore$ = this.imagesService.all(page);
     this.loadingService
       .prepare(showMore$)
-      .subscribe(({ page, hasMore, pictures }) => {
+      .subscribe(({ page, hasMore, items }) => {
         this.page = page;
         this.hasMore = hasMore;
-        this.pictures.push(...pictures);
+        this.pictures.push(...items);
       });
   }
 
